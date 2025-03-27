@@ -1,4 +1,4 @@
-@keyframes cocosMove {
+@keyframes coconut-move {
   0% {
     transform: translateX(0);
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes loaderMoveUp {
+@keyframes loader-move {
   0% {
     transform: translateY(0);
   }
@@ -36,7 +36,7 @@
   height: 100%;
   background: url('../../images/loader_bg.jpg') no-repeat center;
   background-size: cover;
-  animation: loaderMoveUp 1s ease-in-out 3s forwards;
+  animation: loader-move 1s ease-in-out 3s forwards;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -77,6 +77,6 @@
     background-size: cover;
     width: 30%;
     height: 20vh;
-    animation: cocosMove 3s linear forwards;
+    animation: coconut-move 3s linear forwards;
   }
 }

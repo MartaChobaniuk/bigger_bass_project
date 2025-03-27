@@ -22,7 +22,7 @@
   }
 }
 
-@keyframes fistsMove {
+@keyframes move {
   0%,
   100% {
     transform: rotate(0deg) translateY(0);
@@ -31,7 +31,8 @@
     transform: rotate(-5deg) translateY(-5px);
   }
 }
-@keyframes slideUp {
+
+@keyframes slide {
   0% {
     transform: translateY(100%);
     opacity: 0;
@@ -81,7 +82,7 @@
     height: 40vh;
     right: -14%;
     z-index: 4;
-    animation: fistsMove 1.5s infinite ease-in-out alternate;
+    animation: move 1.5s infinite ease-in-out alternate;
   }
 
   &__buttons {
@@ -124,7 +125,6 @@
     &--disabled {
       background: url("../../images/button_dis.svg") no-repeat center;
       background-size: contain;
-      cursor: not-allowed;
       opacity: 0.6;
       animation: none;
 
@@ -135,9 +135,7 @@
   }
 
   &__button-text {
-    font-family:
-      Sigmar One,
-      cursive;
+    font-family: "Sigmar One", cursive;
     font-size: clamp(2vh, 15vw, 6vh);
     line-height: 100%;
     font-weight: normal;
@@ -172,8 +170,7 @@
   &__slots-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
+    place-items: center;
     width: 100%;
     gap: 3%;
 
@@ -207,12 +204,11 @@
   &__slot {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    justify-items: center;
-    align-items: center;
+    place-items: center;
     gap: 5px;
     width: 120px;
     height: 50vh;
-    animation: slideUp 1s forwards;
+    animation: slide 1s forwards;
 
     @media (min-width: 500px) {
       width: 120px;
@@ -237,7 +233,7 @@
     align-self: center;
     width: 100px;
     height: 100px;
-    animation: slideUp 1s ease-out forwards;
+    animation: slide 1s ease-out forwards;
     opacity: 0;
   }
 

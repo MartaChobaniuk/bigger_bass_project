@@ -1,4 +1,4 @@
-@keyframes slideUp {
+@keyframes slide {
   0% {
     transform: translateY(100%);
     opacity: 0;
@@ -22,21 +22,46 @@
 }
 
 @keyframes floating {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @keyframes attention {
-  0% { transform: rotate(0deg); color: #FFD700; }
-  25% { transform: rotate(-2deg); color: #FFA500; }
-  50% { transform: rotate(2deg); color: #FFD700; }
-  75% { transform: rotate(-1deg); color: #FFA500; }
-  100% { transform: rotate(0deg); color: #FFD700; }
+  0% {
+    transform: rotate(0deg);
+    color: #ffd700;
+  }
+
+  25% {
+    transform: rotate(-2deg);
+    color: #ffa500;
+  }
+
+  50% {
+    transform: rotate(2deg);
+    color: #ffd700;
+  }
+
+  75% {
+    transform: rotate(-1deg);
+    color: #ffa500;
+  }
+
+  100% {
+    transform: rotate(0deg);
+    color: #ffd700;
+  }
 }
 
 .pop {
-  animation: slideUp 0.8s ease-out;
+  animation: slide 0.8s ease-out;
   position: relative;
   width: 100%;
   height: 100%;
@@ -69,7 +94,7 @@
     top: 15%;
     font-family: "Changa One", sans-serif;
     font-size: clamp(2vh, 15vw, 10vh);
-    color: #ffffff;
+    color: #fff;
     font-weight: normal;
     text-transform: uppercase;
     text-align: center;
@@ -80,7 +105,7 @@
     top: 27%;
     font-family: "Changa One", sans-serif;
     font-size: clamp(2vh, 10vw, 6vh);
-    color: #ffffff;
+    color: #fff;
     font-weight: normal;
     text-transform: uppercase;
     text-align: center;
@@ -131,7 +156,7 @@
   &__text-white-small {
     font-family: "Changa One", sans-serif;
     font-size: clamp(2vh, 8vw, 4vh);
-    color: #ffffff;
+    color: #fff;
     font-weight: normal;
     text-align: left;
   }
@@ -160,9 +185,7 @@
   }
 
   &__button-text {
-    font-family:
-      Sigmar One,
-      cursive;
+    font-family: "Sigmar One", cursive;
     font-size: clamp(2vh, 10vw, 5vh);
     line-height: 100%;
     font-weight: normal;
