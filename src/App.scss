@@ -1,3 +1,22 @@
-.starter {
-  font-size: 18px;
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  background-image: url("./images/background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 450px;
+  height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
 }

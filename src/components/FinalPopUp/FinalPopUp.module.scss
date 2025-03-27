@@ -1,0 +1,196 @@
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.final {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__background {
+    position: absolute;
+    background: url("../../images/table_stone.svg") no-repeat center;
+    background-size: contain;
+    transform: rotate(90deg);
+    width: 140%;
+    height: 100vh;
+  }
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    background: url("../../images/logo.svg") no-repeat center;
+    background-size: contain;
+    width: 60%;
+    height: 25vh;
+    animation: floating 1.5s infinite ease-in-out;
+  }
+
+  &__text-white {
+    position: absolute;
+    top: 14%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 15vw, 10vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__text-white-part {
+    position: absolute;
+    top: 20%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 15vw, 10vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__subtext {
+    position: absolute;
+    top: 30%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 10vw, 6vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__text-yellow {
+    position: absolute;
+    top: 32%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 15vw, 10vh);
+    color: #f5ff36;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0%;
+  }
+
+  &__text-white-bonus {
+    position: absolute;
+    top: 45%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 8vw, 4vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-align: left;
+  }
+
+  &__block {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    background: url("../../images/done.svg") no-repeat center;
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+  }
+
+  &__text-white-small {
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 8vw, 4vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-align: left;
+  }
+
+  &__button {
+    position: absolute;
+    top: 74%;
+    border: none;
+    background: url("../../images/button_spin.svg") no-repeat center;
+    background-size: contain;
+    width: 160%;
+    height: 20vh;
+    transition: transform 0.5s ease;
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
+  }
+
+  &__button-text {
+    font-family:
+      Sigmar One,
+      cursive;
+    font-size: clamp(2vh, 10vw, 5vh);
+    line-height: 100%;
+    font-weight: normal;
+    color: #fff;
+    -webkit-text-stroke: 2px #360443;
+  }
+
+  &__timer {
+    position: absolute;
+    top: 90%;
+    background: url("../../images/table_blue_big.svg") no-repeat center;
+    background-size: cover;
+    text-align: center;
+    display: inline-block;
+    padding: 5px;
+  }
+
+  &__timer-text {
+    font-family: "Titan One", sans-serif;
+    font-size: clamp(2vh, 10vw, 2vh);
+    line-height: 100%;
+    font-weight: normal;
+    color: #ffffff;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px #300a78;
+  }
+
+  &__timer-minutes {
+    font-family: "Titan One", sans-serif;
+    font-size: clamp(2vh, 10vw, 4vh);
+    line-height: 100%;
+    font-weight: normal;
+    background: linear-gradient(180deg, #dcefff 39.5%, #c079e9 49%, #f0cdff 74.5%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px #300a78;
+  }
+}

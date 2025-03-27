@@ -1,0 +1,172 @@
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes attention {
+  0% { transform: rotate(0deg); color: #FFD700; }
+  25% { transform: rotate(-2deg); color: #FFA500; }
+  50% { transform: rotate(2deg); color: #FFD700; }
+  75% { transform: rotate(-1deg); color: #FFA500; }
+  100% { transform: rotate(0deg); color: #FFD700; }
+}
+
+.pop {
+  animation: slideUp 0.8s ease-out;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__background {
+    position: absolute;
+    background: url("../../images/table_stone.svg") no-repeat center;
+    background-size: contain;
+    transform: rotate(90deg);
+    width: 140%;
+    height: 100vh;
+  }
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    background: url("../../images/logo.svg") no-repeat center;
+    background-size: contain;
+    width: 60%;
+    height: 30vh;
+    animation: floating 1.5s infinite ease-in-out;
+  }
+
+  &__text-white {
+    position: absolute;
+    top: 15%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 15vw, 10vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__subtext {
+    position: absolute;
+    top: 27%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 10vw, 6vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__text-yellow {
+    position: absolute;
+    top: 30%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 15vw, 10vh);
+    color: #f5ff36;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0%;
+    animation: attention 1.5s infinite ease-in-out;
+  }
+
+  &__text-yellow-part {
+    position: absolute;
+    top: 37%;
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 15vw, 10vh);
+    color: #f5ff36;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0%;
+    animation: attention 1.5s infinite ease-in-out;
+  }
+
+  &__block {
+    position: absolute;
+    top: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    background: url("../../images/dis.svg") no-repeat center;
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+  }
+
+  &__text-white-small {
+    font-family: "Changa One", sans-serif;
+    font-size: clamp(2vh, 8vw, 4vh);
+    color: #ffffff;
+    font-weight: normal;
+    text-align: left;
+  }
+
+  &__button {
+    position: absolute;
+    top: 80%;
+    border: none;
+    background: url("../../images/button_spin.svg") no-repeat center;
+    background-size: contain;
+    width: 160%;
+    height: 20vh;
+    transition: transform 0.5s ease;
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+      transition: transform 0.5s ease;
+      animation: none;
+    }
+
+    &:active {
+      transform: scale(1);
+    }
+  }
+
+  &__button-text {
+    font-family:
+      Sigmar One,
+      cursive;
+    font-size: clamp(2vh, 10vw, 5vh);
+    line-height: 100%;
+    font-weight: normal;
+    color: #fff;
+    -webkit-text-stroke: 2px #360443;
+  }
+}

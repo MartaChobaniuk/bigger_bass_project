@@ -1,0 +1,282 @@
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fistsMove {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-5deg) translateY(-5px);
+  }
+}
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+    filter: blur(10px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.start {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  &__images {
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    position: relative;
+  }
+
+  &__image-logo {
+    position: absolute;
+    background: url("../../images/logo.svg") no-repeat center;
+    background-size: contain;
+    width: 70%;
+    height: 20vh;
+    left: -15%;
+    z-index: 5;
+    animation: floating 1.5s infinite ease-in-out;
+  }
+
+  &__image-fisher {
+    position: absolute;
+    background: url("../../images/fisher_2.svg") no-repeat center;
+    background-size: contain;
+    width: 100%;
+    height: 40vh;
+    right: -14%;
+    z-index: 4;
+    animation: fistsMove 1.5s infinite ease-in-out alternate;
+  }
+
+  &__buttons {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__button-free {
+    border: none;
+    background: url("../../images/table_blue_small.svg") no-repeat center;
+    background-size: contain;
+    width: 100%;
+    height: 10vh;
+  }
+
+  &__button-spin {
+    border: none;
+    background: url("../../images/button_spin.svg") no-repeat center;
+    background-size: contain;
+    width: 120%;
+    height: 15vh;
+    transition:
+      transform 0.5s ease,
+      box-shadow 0.3s ease;
+    animation: pulse 2s infinite;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
+
+    &--disabled {
+      background: url("../../images/button_dis.svg") no-repeat center;
+      background-size: contain;
+      cursor: not-allowed;
+      opacity: 0.6;
+      animation: none;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  &__button-text {
+    font-family:
+      Sigmar One,
+      cursive;
+    font-size: clamp(2vh, 15vw, 6vh);
+    line-height: 100%;
+    font-weight: normal;
+    color: #fff;
+    -webkit-text-stroke: 2px #360443;
+  }
+
+  &__button-textfree {
+    font-family: "Titan One", sans-serif;
+    font-size: clamp(2vh, 10vw, 5vh);
+    line-height: 100%;
+    font-weight: normal;
+    background: linear-gradient(180deg, #dcefff 39.5%, #c079e9 49%, #f0cdff 74.5%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px #300a78;
+  }
+
+  &__slots {
+    position: fixed;
+    top: 25vh;
+    display: block;
+    background: url("../../images/place_for_slots.svg") no-repeat center;
+    background-size: cover;
+    max-width: 550px;
+    width: 110%;
+    height: 50vh;
+    z-index: 6;
+  }
+
+  &__slots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    gap: 3%;
+
+    @media (max-width: 500px) {
+      gap: 2%;
+    }
+
+    @media (max-width: 450px) {
+      gap: 2%;
+    }
+
+    @media (max-width: 400px) {
+      gap: 2%;
+    }
+
+    @media (max-width: 300px) {
+      gap: 1%;
+    }
+  }
+
+  &__slots-container {
+    position: fixed;
+    top: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    z-index: 7;
+  }
+
+  &__slot {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+    gap: 5px;
+    width: 120px;
+    height: 50vh;
+    animation: slideUp 1s forwards;
+
+    @media (min-width: 500px) {
+      width: 120px;
+    }
+
+    @media (max-width: 450px) {
+      width: 100px;
+      height: 50vh;
+    }
+
+    @media (max-width: 400px) {
+      width: 100px;
+      height: 40vh;
+    }
+
+    @media (max-width: 300px) {
+      width: 80px;
+    }
+  }
+
+  &__item {
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    animation: slideUp 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  &__item:nth-child(1) {
+    animation-delay: 0.3s; /* Затримка для першого елемента */
+  }
+
+  &__item:nth-child(2) {
+    animation-delay: 0.6s; /* Затримка для другого елемента */
+  }
+
+  &__item:nth-child(3) {
+    animation-delay: 0.9s; /* Затримка для третього елемента */
+  }
+
+    @media (max-width: 500px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    @media (max-width: 450px) {
+      width: 90px;
+      height: 90px;
+    }
+
+    @media (max-width: 400px) {
+      width: 80px;
+      height: 90px;
+    }
+
+    @media (max-width: 300px) {
+      width: 80px;
+      height: 80px;
+    }
+
+    &__item-image {
+      width: 100%;
+      height: 100%;
+      object-position: center;
+      object-fit: contain;
+    }
+  }

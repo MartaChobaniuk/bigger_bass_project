@@ -1,0 +1,82 @@
+@keyframes cocosMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(170%);
+  }
+}
+
+@keyframes loaderMoveUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+.loader {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url('../../images/loader_bg.jpg') no-repeat center;
+  background-size: cover;
+  animation: loaderMoveUp 1s ease-in-out 3s forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    background: url("../../images/logo.svg") no-repeat center;
+    background-size: contain;
+    width: 60%;
+    height: 30vh;
+    animation: floating 1.5s infinite ease-in-out;
+  }
+
+  &__fisher {
+    position: absolute;
+    bottom: -20%;
+    background: url('../../images/fisher.svg') no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  }
+
+  &__button {
+    position: absolute;
+    bottom: 20%;
+    background: url('../../images/load.svg') no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 20vh;
+  }
+
+  &__load {
+    position: absolute;
+    bottom: 23%;
+    left: 8%;
+    background: url('../../images/cocos.svg') no-repeat center;
+    background-size: cover;
+    width: 30%;
+    height: 20vh;
+    animation: cocosMove 3s linear forwards;
+  }
+}
