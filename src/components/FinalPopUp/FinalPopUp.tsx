@@ -4,15 +4,20 @@ import styles from './FinalPopUp.module.scss';
 export const FinalPopUp = () => {
   const [timeLeft, setTimeLeft] = useState(900);
 
-  // Запуск таймера при завантаженні
   useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+
     if (timeLeft > 0) {
-      const timer = setInterval(() => {
+      timer = setInterval(() => {
         setTimeLeft(prev => prev - 1);
       }, 1000);
-
-      return () => clearInterval(timer);
     }
+
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
   }, [timeLeft]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
