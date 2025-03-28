@@ -28,7 +28,6 @@
   }
 }
 
-
 .loader {
   overflow: hidden;
   position: relative;
@@ -53,7 +52,7 @@
 
   &__fisher {
     position: absolute;
-    bottom: -20%;
+    bottom: -23%;
     background: url('../../images/fisher.svg') no-repeat center;
     background-size: cover;
     width: 100%;
@@ -74,9 +73,9 @@
     bottom: 23%;
     left: 8%;
     background: url('../../images/cocos.svg') no-repeat center;
-    background-size: cover;
-    width: 30%;
-    height: 20vh;
+    background-size: contain;
+    width: 150px;
+    height: 150px;
     animation: coconut-move 3s linear forwards;
   }
 }

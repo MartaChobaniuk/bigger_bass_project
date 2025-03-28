@@ -41,12 +41,11 @@ export const FinalPopUp = () => {
       </div>
       <button
         className={styles.final__button}
-        onClick={() =>
-          window.open(
+        onClick={() => {
+          window.location.href =
             // eslint-disable-next-line max-len
-            'https://www.pragmaticplay.com/en/games/bigger-bass-splash/?gamelang=en&cur=USD',
-          )
-        }
+            'https://www.pragmaticplay.com/en/games/bigger-bass-splash/?gamelang=en&cur=USD';
+        }}
       >
         <span className={styles['final__button-text']}>
           INSTALL <br /> THE APP

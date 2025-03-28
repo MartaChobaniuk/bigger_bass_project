@@ -19,79 +19,147 @@ import slot_14 from '../../images/slot_14.svg';
 import slot_15 from '../../images/slot_15.svg';
 import slot_16 from '../../images/slot_16.svg';
 import classNames from 'classnames';
+import { FinalPopUp } from '../FinalPopUp';
 
 const predefinedSpins = [
   // Колонка 1
   [
-    [slot_5, slot_13, slot_12],
-    [slot_11, slot_16, slot_5],
-    [slot_4, slot_2, slot_7],
-    [slot_15, slot_1, slot_14],
+    [slot_5, slot_13, slot_12, slot_4, slot_2, slot_7],
+    [slot_11, slot_16, slot_5, slot_15, slot_1, slot_14],
+    [slot_3, slot_2, slot_7, slot_12, slot_4, slot_2],
+    [slot_15, slot_1, slot_14, slot_12, slot_4, slot_2],
   ],
   // Колонка 2
   [
-    [slot_8, slot_10, slot_6],
-    [slot_3, slot_14, slot_9],
-    [slot_1, slot_7, slot_16],
-    [slot_12, slot_11, slot_2],
+    [slot_8, slot_14, slot_4, slot_3, slot_14, slot_9],
+    [slot_6, slot_16, slot_13, slot_12, slot_11, slot_2],
+    [slot_4, slot_2, slot_16, slot_15, slot_1, slot_8],
+    [slot_7, slot_1, slot_2, slot_7, slot_12, slot_11],
   ],
   // Колонка 3
   [
-    [slot_14, slot_4, slot_1],
-    [slot_6, slot_13, slot_8],
-    [slot_9, slot_12, slot_3],
-    [slot_7, slot_5, slot_15],
+    [slot_4, slot_9, slot_16, slot_6, slot_13, slot_8],
+    [slot_7, slot_14, slot_10, slot_15, slot_4, slot_7],
+    [slot_8, slot_15, slot_9, slot_5, slot_12, slot_6],
+    [slot_10, slot_1, slot_12, slot_11, slot_5, slot_15],
   ],
 ];
 
 export const Start = () => {
-  const [columns, setColumns] = useState(
-    predefinedSpins.map((col) => [...col[0], ...Array(9).fill(slot_5)])
-  );
+  const [spinCount, setSpinCount] = useState(0);
   const [freeSpins, setFreeSpins] = useState(3);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [spinIndex, setSpinIndex] = useState(0);
+  const [columns, setColumns] = useState(
+    predefinedSpins.map(col => col[0].slice(0, 3))
+  );
+  const [spinningColumns, setSpinningColumns] = useState([false, false, false]);
+  const [highlightWinning, setHighlightWinning] = useState(false);
+  const [showFinalPopUp, setShowFinalPopUp] = useState(false);
 
-  const handleSpin = () => {
-    if (freeSpins > 0 && !isSpinning) {
-      setIsSpinning(true);
-      const spinTime = 2000;
-      const intervalTime = 100;
-      let elapsedTime = 0;
+  const finishSpin = () => {
+    const nextSpinIndex = spinCount + 1;
 
-      const interval = setInterval(() => {
-        setColumns((prev) =>
-          prev.map(() =>
-            [...Array(12)].map(() =>
-              predefinedSpins[Math.floor(Math.random() * predefinedSpins.length)][
-                Math.floor(Math.random() * 4)
-              ][Math.floor(Math.random() * 3)]
-            )
-          )
-        );
+    setColumns(
+      predefinedSpins.map(col => col[nextSpinIndex].slice(0, 3))
+    );
+    setSpinCount(nextSpinIndex);
+    setIsSpinning(false);
 
-        elapsedTime += intervalTime;
-        if (elapsedTime >= spinTime) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setFreeSpins((prev) => prev - 1);
-            const nextIndex = (spinIndex + 1) % 4;
-
-            setSpinIndex(nextIndex);
-
-            setColumns((prev) =>
-              prev.map((_, colIndex) => [
-                ...predefinedSpins[colIndex][nextIndex],
-                ...Array(9).fill(slot_5),
-              ])
-            );
-
-            setIsSpinning(false);
-          }, 500);
-        }
-      }, intervalTime);
+    if (nextSpinIndex === 3) {
+      setTimeout(() => {
+        setHighlightWinning(true);
+        setTimeout(() => setShowFinalPopUp(true), 3000);
+      }, 500);
     }
   };
+
+  const handleSpin = () => {
+    if (freeSpins <= 0 || isSpinning || spinCount >= 3) {
+      return;
+    }
+
+    setIsSpinning(true);
+    setFreeSpins(prev => prev - 1);
+
+    setSpinningColumns([true, false, false]);
+    setTimeout(() => setSpinningColumns([true, true, false]), 300);
+    setTimeout(() => setSpinningColumns([true, true, true]), 600);
+
+    const nextSpinIndex = spinCount + 1;
+    const spinInterval = 300;
+    const columnDelays = [0, 300, 600];
+    const stopDelays = [1600, 1900, 2200];
+
+    const columnStates = {
+      completed: [false, false, false],
+      intervals: [] as NodeJS.Timeout[],
+      stopTimeouts: [] as NodeJS.Timeout[]
+    };
+
+    const stopColumnSpin = (colIndex: number) => {
+      clearInterval(columnStates.intervals[colIndex]);
+      columnStates.completed[colIndex] = true;
+
+      setColumns(prev => prev.map((col, i) =>
+        i === colIndex ? predefinedSpins[i][nextSpinIndex].slice(0, 3) : col
+      ));
+
+      setSpinningColumns(prev => {
+        const newState = [...prev];
+
+        newState[colIndex] = false;
+
+        return newState;
+      });
+
+      if (columnStates.completed.every(Boolean)) {
+        finishSpin();
+      }
+    };
+
+    const startColumnSpin = (colIndex: number) => {
+      let currentStep = 0;
+
+      columnStates.intervals[colIndex] = setInterval(() => {
+        currentStep++;
+
+        setColumns(prevColumns =>
+          prevColumns.map((_, index) => {
+            if (index !== colIndex) {
+              return prevColumns[index];
+            }
+
+            const sequence = predefinedSpins[index][nextSpinIndex];
+            const shiftIndex = currentStep % sequence.length;
+
+            return [
+              sequence[shiftIndex % sequence.length],
+              sequence[(shiftIndex + 1) % sequence.length],
+              sequence[(shiftIndex + 2) % sequence.length]
+            ];
+          })
+        );
+      }, spinInterval);
+
+      columnStates.stopTimeouts[colIndex] = setTimeout(() => {
+        stopColumnSpin(colIndex);
+      }, stopDelays[colIndex]);
+    };
+
+    columnDelays.forEach((delay, colIndex) => {
+      setTimeout(() => startColumnSpin(colIndex), delay);
+    });
+
+    return () => {
+      columnStates.intervals.forEach(clearInterval);
+      columnStates.stopTimeouts.forEach(clearTimeout);
+      setSpinningColumns([false, false, false]);
+    };
+  };
+
+  if (showFinalPopUp) {
+    return <FinalPopUp />;
+  }
 
   return (
     <div className={styles.start}>
@@ -103,17 +171,13 @@ export const Start = () => {
       <div className={styles['start__slots-container']}>
         <div className={styles['start__slots-grid']}>
           {columns.map((column, colIndex) => (
-            <div
-              key={colIndex}
-              className={classNames(styles.start__slot, {
-                [styles["start__slot--spinning"]]: isSpinning,
-              })}
-            >
-              {column.slice(0, 3).map((image, rowIndex) => (
+            <div key={colIndex} className={styles.start__slot}>
+              {column.map((image, rowIndex) => (
                 <div
                   key={`${colIndex}-${rowIndex}`}
                   className={classNames(styles.start__item, {
-                    [styles['start__item--new']]: isSpinning,
+                    [styles['start__item--spinning']]: spinningColumns[colIndex],
+                    [styles['start__item--winning']]: highlightWinning && image === slot_1,
                   })}
                 >
                   <img
@@ -136,7 +200,7 @@ export const Start = () => {
         <button
           onClick={freeSpins > 0 ? handleSpin : undefined}
           className={classNames(styles['start__button-spin'], {
-            [styles['start__button-spin--disabled']]: freeSpins === 0,
+            [styles['start__button-spin--disabled']]: freeSpins === 0 || isSpinning,
           })}
         >
           <span className={styles['start__button-text']}>SPIN</span>
@@ -145,3 +209,4 @@ export const Start = () => {
     </div>
   );
 };
+
